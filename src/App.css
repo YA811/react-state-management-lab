@@ -7,3 +7,9 @@ li {
   list-style: none;
   margin: 10px;
 }
+
+
+div{
+  background-color: rgb(35, 35, 35);
+  color: white;
+}
