@@ -81,24 +81,23 @@ const App = () => {
     },
   ]);
 
-  const handleAddFighter = ()=>{
-    if(money >= zombieFighters[0].price){
-      setMoney(money - zombieFighters[0].price);
-      setTotalStrength(totalStrength + zombieFighters[0].strength);
-      setTotalAgility(totalAgility + zombieFighters[0].agility);
-      setTeam([...team, zombieFighters[0]]);
+  const handleAddFighter = (fighter)=>{
+    if(money >= fighter.price){
+      setMoney(money - fighter.price);
+      setTotalStrength(totalStrength + fighter.strength);
+      setTotalAgility(totalAgility + fighter.agility);
+      setTeam([...team, fighter]);
     }
     else{
       alert('Not enough money');
     }
   };
 
-  const handleRemoveFighter = () => {
-    const newTeam = team.filter((_, i) => i!== 0);
-    setTeam(newTeam);
-    setMoney(money + zombieFighters[0].price);
-    setTotalStrength(totalStrength - zombieFighters[0].strength);
-    setTotalAgility(totalAgility - zombieFighters[0].agility);
+  const handleRemoveFighter = (fighter, index) => {
+    setMoney(money + fighter.price);
+    setTotalStrength(totalStrength - fighter.strength);
+    setTotalAgility(totalAgility - fighter.agility);
+    setTeam(team.filter((_, i) => i!== index));
 
   }
 
@@ -124,7 +123,7 @@ const App = () => {
       <p>Price: {character.price}</p>
       <p>Strength: {character.strength}</p>
       <p>Agility: {character.agility}</p>
-      <button onClick={handleRemoveFighter}>Delete</button>
+      <button onClick={() => {handleRemoveFighter(character, index)}}>Delete</button>
     </li>
   ))}
 </li>
@@ -137,7 +136,7 @@ const App = () => {
       <p>Price: {zombieFighter.price}</p>
       <p>Strength: {zombieFighter.strength}</p>
       <p>Agility: {zombieFighter.agility}</p>
-      <button onClick={handleAddFighter}>Add</button>
+      <button onClick={() => {handleAddFighter(zombieFighter)}}>Add</button>
     </li>
   ))}
 </li>
